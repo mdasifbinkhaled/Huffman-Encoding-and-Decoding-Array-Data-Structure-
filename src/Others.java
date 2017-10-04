@@ -1,0 +1,80 @@
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Md. Asif Bin Khaled
+ */
+public class Others {
+
+    public static int[] frequencyTable(String filename) throws FileNotFoundException, IOException {
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filename), Charset.forName("UTF-8")));
+        int[] ascii_alphabet = new int[256];
+
+        int c;
+        while ((c = bufferedReader.read()) != -1) {
+            ascii_alphabet[c]++;
+
+        }
+
+        bufferedReader.close();
+        return ascii_alphabet;
+    }
+
+    public static void printHuffmanEncodingTable(String[] mappingBits, char[] characters) {
+        for (int i = 0; i < characters.length; i++) {
+            System.out.println(characters[i] + " " + mappingBits[i]);
+        }
+
+    }
+
+    public static void printNonZeroFrequency(int[] input) {
+        System.out.println("Printing Encountered Characters and Their Frequencies");
+        System.out.println("---------------------------------------------------------------------------------------------");
+        for (int i = 0; i <= 255; i++) {
+            if (input[i] != 0) {
+                System.out.println((char) (i) + " " + input[i]);
+            }
+        }
+        System.out.println("---------------------------------------------------------------------------------------------");
+    }
+
+    public static char[] characterTable(int[] characterFrequency) {
+        int processCount = nonZeroFrequency(characterFrequency);
+        char[] characters = new char[processCount];
+        int tempProcessCount = 0;
+
+        for (int i = 0; i <= 255; i++) {
+
+            if (characterFrequency[i] != 0) {
+
+                characters[tempProcessCount] = (char) i;
+
+                tempProcessCount++;
+            }
+
+        }
+        return characters;
+    }
+
+    public static int nonZeroFrequency(int[] input) {
+        int nonZeroFrequency = 0;
+        for (int i = 0; i <= 255; i++) {
+            if (input[i] != 0) {
+                nonZeroFrequency++;
+            }
+        }
+        return nonZeroFrequency;
+    }
+}
